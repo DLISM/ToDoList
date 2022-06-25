@@ -1,12 +1,11 @@
 package com.example.todolist.controller;
 
-import com.example.todolist.domain.TaskList;
+import com.example.todolist.domain.Task;
+import com.example.todolist.domain.User;
 import com.example.todolist.repository.TaskListRepo;
+import com.example.todolist.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,19 +14,23 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    private TaskListRepo dolistRepo;
+    private TaskListRepo taskListRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     @GetMapping
-    public List<TaskList> main(){
-        TaskList taskList = new TaskList();
-        taskList.setDone(true);
-        taskList.setText("Create controller");
-        dolistRepo.save(taskList);
-        return dolistRepo.findAll();
+    public List<Task> main(){
+        return taskListRepo.findAll();
     }
 
     @GetMapping("{id}")
-    public TaskList getTask(@PathVariable("id") TaskList task){
+    public Task getTask(@PathVariable("id") Task task){
         return task;
+    }
+
+    @PostMapping
+    public Task add(@RequestBody Task task){
+        return taskListRepo.save(task);
     }
 }
