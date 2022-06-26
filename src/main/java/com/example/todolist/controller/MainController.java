@@ -1,36 +1,14 @@
 package com.example.todolist.controller;
 
-import com.example.todolist.domain.Task;
-import com.example.todolist.domain.User;
-import com.example.todolist.repository.TaskListRepo;
-import com.example.todolist.repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping("/")
 public class MainController {
-
-    @Autowired
-    private TaskListRepo taskListRepo;
-
-    @Autowired
-    private UserRepo userRepo;
-
     @GetMapping
-    public List<Task> main(){
-        return taskListRepo.findAll();
-    }
-
-    @GetMapping("{id}")
-    public Task getTask(@PathVariable("id") Task task){
-        return task;
-    }
-
-    @PostMapping
-    public Task add(@RequestBody Task task){
-        return taskListRepo.save(task);
+    public String main(){
+        return "index";
     }
 }
