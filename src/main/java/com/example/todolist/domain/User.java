@@ -18,6 +18,8 @@ public class User {
 
     private String password;
 
+    private boolean active;
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Task> tasks;
 
