@@ -1,9 +1,11 @@
 package com.example.todolist.controller;
 
 import com.example.todolist.domain.Task;
-import com.example.todolist.repository.TaskListRepo;
-import com.example.todolist.repository.UserRepo;
+import com.example.todolist.domain.User;
+import com.example.todolist.repository.TaskRepo;
+import com.example.todolist.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,14 +15,20 @@ import java.util.List;
 public class TaskController {
 
     @Autowired
-    private TaskListRepo taskListRepo;
+    private TaskRepo taskRepo;
+
+
+    private final TaskService taskService;
 
     @Autowired
-    private UserRepo userRepo;
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
 
     @GetMapping
-    public List<Task> main(){
-        return taskListRepo.findAll();
+    public List<Task> list(@AuthenticationPrincipal User user){
+        return taskRepo.findAll();
     }
 
     @GetMapping("{id}")
@@ -29,23 +37,20 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task addTask(@RequestBody Task task){
-        return taskListRepo.save(task);
+    public Task addTask(@AuthenticationPrincipal User user, @RequestBody Task task){
+
+        return taskService.create(task, user);
     }
 
     @DeleteMapping("{id}")
     public void deleteTask(@PathVariable("id") Task task){
-        taskListRepo.delete(task);
+
+        taskService.delete(task);
     }
 
-    @PutMapping
-    public Task updateTask(
-            @RequestParam("id") Task task,
-            @RequestParam("text") String text,
-            @RequestParam("done") boolean done
-    ){
-            task.setText(text);
-            task.setDone(done);
-            return taskListRepo.save(task);
+    @PutMapping("{id}")
+    public Task updateTask(@PathVariable("id") Task taskFromDB, @RequestBody Task task){
+
+        return taskService.update(taskFromDB, task);
     }
 }

@@ -19,4 +19,8 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User author;
 
+
+    public boolean getDone() {
+        return done;
+    }
 }
