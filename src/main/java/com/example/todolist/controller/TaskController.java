@@ -28,6 +28,7 @@ public class TaskController {
 
     @GetMapping
     public List<Task> list(@AuthenticationPrincipal User user){
+        System.out.println(user);
         return taskRepo.findAll();
     }
 
