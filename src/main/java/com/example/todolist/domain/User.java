@@ -23,6 +23,9 @@ public class User implements UserDetails {
 
     private boolean active;
 
+    private String email;
+
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Task> tasks;
 

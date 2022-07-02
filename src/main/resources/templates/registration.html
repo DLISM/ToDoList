@@ -7,8 +7,9 @@
 <body>
 <h1>Add User!</h1>
 <form th:action="@{/registration}" method="post">
-    <div><label> User Name : <input type="text" name="username"/> </label></div>
-    <div><label> Password: <input type="password" name="password"/> </label></div>
+    <div><label> Имя пользователья : <input type="text" name="username"/> </label></div>
+    <div><label> Пароль: <input type="password" name="password"/> </label></div>
+    <div><label> Потверждения пароля: <input type="password" name="password2"/> </label></div>
     <div><input type="submit" value="Sign In"/></div>
 </form>
 </body>
