@@ -1,5 +1,6 @@
 package com.example.todolist.domain;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,17 +16,22 @@ import java.util.Set;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(Views.IdName.class)
     private Long id;
 
+    @JsonView(Views.IdName.class)
     private String username;
 
     private String password;
 
+    @JsonView(Views.FullProfile.class)
     private boolean active;
 
+    @JsonView(Views.FullProfile.class)
     private String email;
 
 
+    @JsonView(Views.FullTask.class)
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Task> tasks;
 

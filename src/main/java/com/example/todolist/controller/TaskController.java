@@ -2,13 +2,17 @@ package com.example.todolist.controller;
 
 import com.example.todolist.domain.Task;
 import com.example.todolist.domain.User;
+import com.example.todolist.domain.Views;
 import com.example.todolist.repository.TaskRepo;
+import com.example.todolist.repository.UserRepo;
 import com.example.todolist.service.TaskService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/task")
@@ -16,6 +20,9 @@ public class TaskController {
 
     @Autowired
     private TaskRepo taskRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
 
     private final TaskService taskService;
@@ -27,8 +34,8 @@ public class TaskController {
 
 
     @GetMapping
+    @JsonView(Views.IdName.class)
     public List<Task> list(@AuthenticationPrincipal User user){
-        System.out.println(user);
         return taskRepo.findAll();
     }
 
@@ -40,7 +47,7 @@ public class TaskController {
     @PostMapping
     public Task addTask(@AuthenticationPrincipal User user, @RequestBody Task task){
 
-        return taskService.create(task, user);
+       return taskService.create(task, user);
     }
 
     @DeleteMapping("{id}")

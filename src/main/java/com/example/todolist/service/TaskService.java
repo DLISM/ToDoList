@@ -3,10 +3,12 @@ package com.example.todolist.service;
 import com.example.todolist.domain.Task;
 import com.example.todolist.domain.User;
 import com.example.todolist.repository.TaskRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TaskService {
+    @Autowired
     private TaskRepo taskRepo;
 
 
