@@ -11,7 +11,6 @@ import java.util.Set;
 
 
 @Entity
-@Data
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
@@ -63,5 +62,63 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return isActive();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

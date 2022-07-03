@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Data
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,10 +20,43 @@ public class Task {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
+    @JsonView(Views.FullProfile.class)
     private User author;
 
 
     public boolean getDone() {
         return done;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }
