@@ -40,6 +40,7 @@ public class TaskController {
     }
 
     @GetMapping("{id}")
+    @JsonView(Views.IdName.class)
     public Task getTask(@PathVariable("id") Task task){
         return task;
     }
@@ -58,8 +59,8 @@ public class TaskController {
     }
 
     @PutMapping("{id}")
+    @JsonView(Views.IdName.class)
     public Task updateTask(@PathVariable("id") Task taskFromDB, @RequestBody Task task){
-
         return taskService.update(taskFromDB, task);
     }
 }

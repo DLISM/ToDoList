@@ -43,4 +43,12 @@ public class UserService implements UserDetailsService {
 
         return true;
     }
+
+    public User update(User userFromDB, User user) {
+
+        userFromDB.setUsername(user.getUsername());
+        userFromDB.setEmail(user.getEmail());
+
+        return userRepo.save(userFromDB);
+    }
 }
