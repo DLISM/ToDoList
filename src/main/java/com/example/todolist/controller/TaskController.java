@@ -45,6 +45,7 @@ public class TaskController {
     }
 
     @PostMapping
+    @JsonView(Views.IdName.class)
     public Task addTask(@AuthenticationPrincipal User user, @RequestBody Task task){
 
        return taskService.create(task, user);
