@@ -3,6 +3,7 @@ package com.example.todolist.service;
 import com.example.todolist.domain.Role;
 import com.example.todolist.domain.User;
 import com.example.todolist.repository.UserRepo;
+import com.example.todolist.util.UpdatePassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -50,5 +51,15 @@ public class UserService implements UserDetailsService {
         userFromDB.setEmail(user.getEmail());
 
         return userRepo.save(userFromDB);
+    }
+
+    public boolean updatePassword(User userFromDB, UpdatePassword updatePassword) {
+
+        if(updatePassword.getNewPassword().equals(updatePassword.getNewPasswordConfirmed())){
+            userFromDB.setPassword(passwordEncoder.encode(updatePassword.getNewPassword()));
+            userRepo.save(userFromDB);
+            return true;
+        }
+        return false;
     }
 }
