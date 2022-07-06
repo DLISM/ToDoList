@@ -29,6 +29,7 @@ public class User implements UserDetails {
     @JsonView(Views.FullProfile.class)
     private String email;
 
+    private String activationCode;
 
     @JsonView(Views.FullTask.class)
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -120,5 +121,13 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 }
