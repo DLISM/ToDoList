@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -40,5 +41,18 @@ public class RegistrationController {
             return "registration";
         }
         return "redirect:/login";
+    }
+
+    @GetMapping("/activate/{code}")
+    private String activate(@PathVariable String code, Model model){
+
+        boolean isActivate = userService.activateUser(code);
+
+        if(isActivate){
+            model.addAttribute("message", "Профиль пользователя успешно активирован!");
+        }else {
+            model.addAttribute("message", "Код активации не найдено!");
+        }
+        return "login";
     }
 }
