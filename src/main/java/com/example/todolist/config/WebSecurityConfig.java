@@ -19,19 +19,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .antMatcher("/**")
                 .authorizeRequests()
-                    .antMatchers("/", "/registration", "/activate/*").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/", "/login**", "/js/**", "/error**").permitAll()
+                .anyRequest().authenticated()
+                .and().logout().logoutSuccessUrl("/").permitAll()
                 .and()
-                    .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                .and()
-                    .logout()
-                    .permitAll()
-                .and().csrf().disable();
+                .csrf().disable();
     }
 
 

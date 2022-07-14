@@ -34,3 +34,5 @@ build/
 
 ### Vue ###
 node_modules
+
+src/main/resources/application.properties

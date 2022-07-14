@@ -28,17 +28,17 @@ public class RegistrationController {
         boolean isConfirm = StringUtils.hasText(passwordConfirm);
         if(!isConfirm){
             model.addAttribute("password2Error", "Password confirmation empty");
-            return "registration";
+            return "index";
         }
 
         if(user.getPassword()!=null && !user.getPassword().equals(passwordConfirm)){
             model.addAttribute("passwordError", "Password are different");
-            return "registration";
+            return "index";
         }
 
         if(!userService.addUser(user)){
             model.addAttribute("usernameError", "User exists!");
-            return "registration";
+            return "index";
         }
         return "redirect:/login";
     }
