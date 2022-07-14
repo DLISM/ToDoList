@@ -1,26 +1,37 @@
 <template>
 
-  <div v-if="true">
-    <h1>Welcome to My Tasks application!</h1>
-    <p>You can create to do list and spend effectively your time!</p>
-    <p>For start please <a href="/login">login</a></p>
+  <div v-if="!profile">
+    <h1>Добро пожаловать в приложения My</h1>
+    <p>Вы здесь можите составить список задач и эффективно управля вашим временим!</p>
+    <p>Для начало работы войдите в аккаунт <br>
+      или регестрируйтес, если у вас нету аккаунта
+    </p>
+    <p>
+      <a href="/login">Войти</a>
+      <a href="/registration">Регистрация</a>
+    </p>
   </div>
 
   <div v-else>
-    <login-page/>
+    <router-view></router-view>
   </div>
-
 </template>
 
 <script>
 import LoginPage from "pages/login.vue"
+import Registration from "pages/registration.vue"
+
 export default {
   name: "App",
+
   components:{
-    LoginPage
+    LoginPage,
+    Registration
   },
-  date(){
+
+  data(){
     return{
+      profile: frontendData
     }
   }
 }

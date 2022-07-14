@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>My Tasks</title>
-    <script>
-        var profile = true;
+    <script th:inline="javascript">
+        var frontendData = JSON.parse([[${profile}]])
     </script>
 </head>
 <body>

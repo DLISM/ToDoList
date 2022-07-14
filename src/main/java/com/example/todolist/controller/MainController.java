@@ -15,6 +15,7 @@ public class MainController {
 
     @GetMapping
     public String main(Model model){
+        model.addAttribute("profile", true);
         model.addAttribute("isDevMode", true);
         return "index";
     }
