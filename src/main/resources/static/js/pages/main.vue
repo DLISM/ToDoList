@@ -1,20 +1,38 @@
 <template>
-  <div>
-    <h1>Добро пожаловать в приложения My</h1>
+  <v-container v-if="!profile">
+    <h2>Добро пожаловать в приложения My Tasks</h2>
     <p>Вы здесь можите составить список задач и эффективно управля вашим временим!</p>
-    <p>Для начало работы войдите в аккаунт <br>
-      или регестрируйтес, если у вас нету аккаунта
+    <p>Для начало работы войдите в аккаунт
+      или зарегистрируйтесь, если у вас нету аккаунта!
     </p>
     <p>
-      <a href="/#/login">Войти</a>
-      <a href="/#/registration">Регистрация</a>
+      <v-btn
+          depressed
+          color="primary"
+      >
+        Войти
+      </v-btn>
+      <v-btn
+          depressed
+          color="primary"
+      >
+        Регистрация
+      </v-btn>
     </p>
-  </div>
+  </v-container>
+  <v-container v-else>
+    List Task
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: "main"
+  name: "main",
+  data(){
+    return{
+      profile: frontendData
+    }
+  }
 }
 </script>
 

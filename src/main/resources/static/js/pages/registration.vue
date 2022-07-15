@@ -1,6 +1,6 @@
 <template>
-  <div>
-  <h1>Регистрация</h1>
+  <v-container>
+  <h2>Регистрация</h2>
   <form action="/registration" method="post">
     <div>
       <label>Имя пользователья : </label>
@@ -20,7 +20,7 @@
     </div>
     <div><input type="submit" value="Зарегистрироваться"/></div>
   </form>
-  </div>
+  </v-container>
 </template>
 
 <script>

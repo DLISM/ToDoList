@@ -1,13 +1,18 @@
 <template>
+  <v-app>
+    <v-toolbar
+        color="cyan"
+        dark
+        flat
+    >
+      <v-toolbar-title>My Tasks</v-toolbar-title>
+    </v-toolbar>
 
-  <div v-if="!profile">
+    <v-main>
+      <router-view></router-view>
+    </v-main>
 
-    <router-view></router-view>
-  </div>
-
-  <div v-else>
-    <router-view></router-view>
-  </div>
+  </v-app>
 </template>
 
 <script>
@@ -24,5 +29,7 @@ export default {
 </script>
 
 <style>
-
+h1{
+  color:#fff
+}
 </style>

@@ -1,11 +1,30 @@
 <template>
-  <div>
-    <form action="/login" method="post">
-      <div><label> Пользователь : <input type="text" name="username"/> </label></div>
-      <div><label> Пароль: <input type="password" name="password"/> </label></div>
-      <div><input type="submit" value="Войти"/></div>
-    </form>
-  </div>
+  <v-container>
+    <v-content class="col-sm-4">
+        <form>
+          <v-text-field
+              v-model="username"
+              :error-messages="nameErrors"
+              :counter="10"
+              label="Логин"
+              required
+          ></v-text-field>
+          <v-text-field
+              v-model="password"
+              :error-messages="emailErrors"
+              label="Пароль"
+              required
+          ></v-text-field>
+          <v-btn
+              class="mr-4"
+              @click="submit"
+              color="primary"
+          >
+            Войты
+          </v-btn>
+        </form>
+    </v-content>
+  </v-container>
 
 </template>
 

@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-container>
     Profile user
-  </div>
+  </v-container>
 </template>
 
 <script>
