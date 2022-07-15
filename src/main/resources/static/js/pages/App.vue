@@ -8,9 +8,7 @@
       <v-toolbar-title>My Tasks</v-toolbar-title>
     </v-toolbar>
 
-    <v-main>
       <router-view></router-view>
-    </v-main>
 
   </v-app>
 </template>

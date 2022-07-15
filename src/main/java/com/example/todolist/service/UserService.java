@@ -2,6 +2,7 @@ package com.example.todolist.service;
 
 import com.example.todolist.domain.Role;
 import com.example.todolist.domain.User;
+import com.example.todolist.domain.UserDto;
 import com.example.todolist.repository.UserRepo;
 import com.example.todolist.util.UpdatePassword;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,18 +46,21 @@ public class UserService implements UserDetailsService {
         return true;
     }
 
-    public boolean addUser(User user) {
+    public boolean addUser(UserDto user) {
 
         User userFromDB = userRepo.findByUsername(user.getUsername());
         if(userFromDB!=null){
             return false;
         }
 
-        user.setActive(true);
-        user.setRoles(Collections.singleton(Role.USER));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActivationCode(UUID.randomUUID().toString());
-        userRepo.save(user);
+        userFromDB=new User();
+        userFromDB.setUsername(user.getUsername());
+        userFromDB.setEmail(user.getEmail());
+        userFromDB.setActive(true);
+        userFromDB.setRoles(Collections.singleton(Role.USER));
+        userFromDB.setPassword(passwordEncoder.encode(user.getPassword()));
+        userFromDB.setActivationCode(UUID.randomUUID().toString());
+        userRepo.save(userFromDB);
 
         if(StringUtils.hasText(user.getEmail())) {
 
@@ -64,9 +68,9 @@ public class UserService implements UserDetailsService {
                     "Привет!\n" +
                     "Добро пожаловать в приложения To Do! Для активации переходи по ссылке: " +
                     "localhost:8080/activate/%s",
-                     user.getActivationCode());
+                    userFromDB.getActivationCode());
 
-            mailSender.send(user.getEmail(), "Активация аккаунта", message);
+            mailSender.send(userFromDB.getEmail(), "Активация аккаунта", message);
         }
         return true;
     }

@@ -1,46 +1,39 @@
 package com.example.todolist.controller;
 
 import com.example.todolist.domain.User;
+import com.example.todolist.domain.UserDto;
+import com.example.todolist.domain.Views;
 import com.example.todolist.service.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 public class RegistrationController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("registration")
+    @GetMapping("/registration")
     public String registration(){
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, @RequestParam("password2") String passwordConfirm, Model model){
+    @JsonView(Views.IdName.class)
+    public UserDto addUser(@RequestBody UserDto user){
 
-        boolean isConfirm = StringUtils.hasText(passwordConfirm);
-        if(!isConfirm){
-            model.addAttribute("password2Error", "Password confirmation empty");
-            return "index";
-        }
-
-        if(user.getPassword()!=null && !user.getPassword().equals(passwordConfirm)){
-            model.addAttribute("passwordError", "Password are different");
-            return "index";
+        if(user.getPassword()!=null && !user.getPassword().equals(user.getPasswordConfirm())){
+            return user;
         }
 
         if(!userService.addUser(user)){
-            model.addAttribute("usernameError", "User exists!");
-            return "index";
+            return user;
         }
-        return "redirect:/login";
+        return user;
     }
 
     @GetMapping("/activate/{code}")
