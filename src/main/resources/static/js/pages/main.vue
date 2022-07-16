@@ -9,28 +9,42 @@
       <v-btn
           depressed
           color="primary"
+          @click="login"
       >
         Войти
       </v-btn>
       <v-btn
           depressed
           color="primary"
+          @click="registration"
       >
         Регистрация
       </v-btn>
     </p>
   </v-container>
   <v-container v-else>
-    List Task
+    <task-list/>
   </v-container>
 </template>
 
 <script>
+import TaskList from 'components/TaskList.vue'
 export default {
   name: "main",
+  components:{
+    TaskList
+  },
   data(){
     return{
       profile: frontendData
+    }
+  },
+  methods:{
+    login(){
+      this.$router.push('/login')
+    },
+    registration(){
+      this.$router.push('/registration')
     }
   }
 }

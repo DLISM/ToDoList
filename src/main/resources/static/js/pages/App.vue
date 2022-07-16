@@ -3,9 +3,16 @@
     <v-toolbar
         color="cyan"
         dark
-        flat
+        dense
     >
       <v-toolbar-title>My Tasks</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn v-if="profile" icon href="/logout">
+        Выход
+      </v-btn>
+      <v-btn v-else icon @click="login">
+        Войти
+      </v-btn>
     </v-toolbar>
 
       <router-view></router-view>
@@ -22,6 +29,11 @@ export default {
     return{
       profile: frontendData
     }
+  },
+  methods:{
+    login(){
+      this.$router.push('/login')
+    },
   }
 }
 </script>

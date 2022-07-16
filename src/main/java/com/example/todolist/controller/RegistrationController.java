@@ -17,11 +17,6 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/registration")
-    public String registration(){
-        return "registration";
-    }
-
     @PostMapping("/registration")
     @JsonView(Views.IdName.class)
     public UserDto addUser(@RequestBody UserDto user){
