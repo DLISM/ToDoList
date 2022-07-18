@@ -7,12 +7,8 @@
     >
       <v-toolbar-title>My Tasks</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="profile" icon href="/logout">
-        Выход
-      </v-btn>
-      <v-btn v-else icon @click="login">
-        Войти
-      </v-btn>
+      <router-link v-if="profile" to="/logout" class="link">Выход</router-link>
+      <router-link v-else :to="{name:'login'}" class="link">Войти</router-link>
     </v-toolbar>
 
       <router-view></router-view>
@@ -41,5 +37,27 @@ export default {
 <style>
 h1{
   color:#fff
+}
+
+.btn{
+  padding: 10px 30px;
+  background: #e6e6e6;
+  color: #fff;
+  text-decoration: none;
+}
+
+.btn-primary{
+  background: #007bff;
+  color: #fff;
+}
+
+.btn-danger{
+  color: #fff;
+  background: #dc3545;
+}
+
+.link{
+  text-decoration: none;
+  color: #fff;
 }
 </style>

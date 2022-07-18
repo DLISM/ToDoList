@@ -7,9 +7,21 @@ import login from 'pages/login.vue'
 Vue.use(VueRouter)
 
 const routes=[
-    {path:"/", component: main},
-    {path:"/login", component: login},
-    {path:"/registration", component: registration},
+    {
+        name:'main',
+        path:"/",
+        component: main
+    },
+    {
+        path:"/login",
+        name:'login',
+        component: login
+    },
+    {
+        name:'register',
+        path:"/register",
+        component: registration
+    },
     {path:"*", component: main},
 ]
 

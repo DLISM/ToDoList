@@ -6,20 +6,9 @@
       или зарегистрируйтесь, если у вас нету аккаунта!
     </p>
     <p>
-      <v-btn
-          depressed
-          color="primary"
-          @click="login"
-      >
-        Войти
-      </v-btn>
-      <v-btn
-          depressed
-          color="primary"
-          @click="registration"
-      >
-        Регистрация
-      </v-btn>
+      <router-link :to="{name:'login'}" class="btn btn-primary">Войти</router-link>
+      <router-link :to="{name:'register'}" class="btn btn-primary">Регистрация</router-link>
+
     </p>
   </v-container>
   <v-container v-else>
@@ -40,12 +29,7 @@ export default {
     }
   },
   methods:{
-    login(){
-      this.$router.push('/login')
-    },
-    registration(){
-      this.$router.push('/registration')
-    }
+
   }
 }
 </script>
