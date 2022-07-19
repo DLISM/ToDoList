@@ -7,6 +7,7 @@
     >
       <v-toolbar-title>My Tasks</v-toolbar-title>
       <v-spacer></v-spacer>
+      <router-link :to="{name:'profile'}" v-if="profile" class="link">{{profile.username}}</router-link>
       <router-link v-if="profile" to="/logout" class="link">Выход</router-link>
       <router-link v-else :to="{name:'login'}" class="link">Войти</router-link>
     </v-toolbar>
@@ -59,5 +60,6 @@ h1{
 .link{
   text-decoration: none;
   color: #fff;
+  margin: 0 15px;
 }
 </style>
