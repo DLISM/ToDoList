@@ -6,6 +6,7 @@ import com.example.todolist.repository.TaskRepo;
 import com.example.todolist.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class TaskService {
@@ -26,8 +27,13 @@ public class TaskService {
 
     public Task update(Task taskFromDB, Task task) {
 
-        taskFromDB.setText(task.getText());
-        taskFromDB.setDone(task.getDone());
+        if(StringUtils.hasText(task.getText())){
+            taskFromDB.setText(task.getText());
+        }
+
+        if(task.getDone()){
+            taskFromDB.setDone(task.getDone());
+        }
 
         return taskRepo.save(taskFromDB);
     }

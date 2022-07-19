@@ -13,7 +13,24 @@
   </v-form>
 
   <div v-for="task in tasks">
-   {{task.text}}
+
+    <div class="task-item">
+      <span>{{task.text}}</span>
+
+      <div @click="checkTask(task.id)">
+
+        <v-icon v-if="task.done">
+          mdi-check-circle
+        </v-icon>
+
+        <v-icon v-else>
+          mdi-checkbox-blank-circle-outline
+        </v-icon>
+
+      </div>
+
+    </div>
+
   </div>
 
 </v-container>
@@ -24,7 +41,7 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource)
-const taskAPI=Vue.resource('/task')
+const taskAPI=Vue.resource('/task{/id}')
 
 export default {
   name: "TaskList",
@@ -55,6 +72,14 @@ export default {
       }, response => {
         console.log("error save", response)
       });
+    },
+    checkTask(idTask){
+      taskAPI.update({id:idTask}, {done:true}).then(response => {
+        this.tasks.push(response.body)
+        this.taskInput=''
+      }, response => {
+        console.log("error update", response)
+      });
     }
 
   },
@@ -65,5 +90,8 @@ export default {
 </script>
 
 <style scoped>
-
+.task-item{
+  padding: 10px 5px;
+  border-bottom: solid 1px #e6e6e6;
+}
 </style>
