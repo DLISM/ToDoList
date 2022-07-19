@@ -36,7 +36,7 @@ public class TaskController {
     @GetMapping
     @JsonView(Views.IdName.class)
     public List<Task> list(@AuthenticationPrincipal User user){
-        return taskRepo.findAll();
+        return taskRepo.findAllByUserId(user.getId());
     }
 
     @GetMapping("{id}")

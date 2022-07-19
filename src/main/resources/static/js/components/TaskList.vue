@@ -5,7 +5,7 @@
       v-model="taskInput"
       :rules="taskRules"
       :counter="5"
-      label="Task"
+      label="Задача"
       required
     >
     </v-text-field>
@@ -53,7 +53,7 @@ export default {
         this.tasks.push(response.body)
         this.taskInput=''
       }, response => {
-        console.log("error get", response)
+        console.log("error save", response)
       });
     }
 

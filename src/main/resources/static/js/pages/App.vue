@@ -7,24 +7,34 @@
     >
       <v-toolbar-title>My Tasks</v-toolbar-title>
       <v-spacer></v-spacer>
-      <router-link :to="{name:'profile'}" v-if="profile" class="link">{{profile.username}}</router-link>
-      <router-link v-if="profile" to="/logout" class="link">Выход</router-link>
-      <router-link v-else :to="{name:'login'}" class="link">Войти</router-link>
+
+
+
+      <router-link :to="{name:'profile'}" v-if="profile" class="link">
+        {{profile.username}}
+        <v-icon>mdi-account</v-icon>
+      </router-link>
+      <router-link v-if="profile" to="/logout" class="link">
+        <v-icon>mdi-logout</v-icon>
+      </router-link>
+      <router-link v-else :to="{name:'login'}" class="link">
+        Войти
+      </router-link>
+
     </v-toolbar>
 
-      <router-view></router-view>
+    <router-view></router-view>
 
   </v-app>
 </template>
 
 <script>
-
 export default {
   name: "App",
 
   data(){
     return{
-      profile: frontendData
+      profile: frontendData,
     }
   },
   methods:{
