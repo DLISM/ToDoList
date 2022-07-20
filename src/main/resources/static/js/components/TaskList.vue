@@ -14,18 +14,31 @@
 
   <div v-for="task in tasks">
 
-    <div class="task-item">
+    <div v-bind:class="{ done: task.done }" class="task-item">
       <span>{{task.text}}</span>
 
-      <div @click="checkTask(task.id)">
+      <div class="buttons">
+        <div @click="deleteTask(task.id)">
+          Удалить
+          <v-icon>
+            mdi-delete-circle-outline
+          </v-icon>
+        </div>
 
-        <v-icon v-if="task.done">
-          mdi-check-circle
-        </v-icon>
-
-        <v-icon v-else>
-          mdi-checkbox-blank-circle-outline
-        </v-icon>
+        <div @click="checkTask(task.id, task.done)">
+          <span v-if="task.done">
+            Сделан
+            <v-icon >
+              mdi-check-circle
+            </v-icon>
+          </span>
+          <span v-else>
+            Не сделан
+            <v-icon>
+              mdi-checkbox-blank-circle-outline
+            </v-icon>
+          </span>
+        </div>
 
       </div>
 
@@ -73,10 +86,20 @@ export default {
         console.log("error save", response)
       });
     },
-    checkTask(idTask){
-      taskAPI.update({id:idTask}, {done:true}).then(response => {
-        this.tasks.push(response.body)
-        this.taskInput=''
+    checkTask(idTask, status){
+
+      taskAPI.update({id:idTask}, {done:!status}).then(response => {
+        let elementIndex = this.tasks.findIndex((obj => obj.id == response.body.id));
+        this.tasks[elementIndex].done=response.body.done
+
+      }, response => {
+        console.log("error update", response)
+      });
+    },
+
+    deleteTask(idTask){
+      taskAPI.delete({id:idTask}).then(response => {
+        this.getTasks()
       }, response => {
         console.log("error update", response)
       });
@@ -93,5 +116,16 @@ export default {
 .task-item{
   padding: 10px 5px;
   border-bottom: solid 1px #e6e6e6;
+  display: flex;
+  justify-content: space-between;
+}
+.done span{
+  text-decoration: line-through;
+}
+.buttons{
+  display: flex;
+}
+.buttons>div{
+  margin: 0 20px;
 }
 </style>

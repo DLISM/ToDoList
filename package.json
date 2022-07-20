@@ -9,6 +9,8 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "@mdi/font": "^7.0.96",
+    "@mdi/js": "^7.0.96",
     "vue": "2.5.17",
     "vue-resource": "1.5.1",
     "vue-router": "3.0.2",

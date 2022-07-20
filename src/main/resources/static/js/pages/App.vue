@@ -15,7 +15,8 @@
         <v-icon>mdi-account</v-icon>
       </router-link>
       <router-link v-if="profile" to="/logout" class="link">
-        <v-icon>mdi-logout</v-icon>
+        Выйти
+        <v-icon>log-out</v-icon>
       </router-link>
       <router-link v-else :to="{name:'login'}" class="link">
         Войти

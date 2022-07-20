@@ -32,7 +32,7 @@ public class User implements UserDetails {
     private String activationCode;
 
     @JsonView(Views.FullTask.class)
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private Set<Task> tasks;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

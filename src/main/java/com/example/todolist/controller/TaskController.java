@@ -12,7 +12,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/task")
@@ -36,6 +35,7 @@ public class TaskController {
     @GetMapping
     @JsonView(Views.IdName.class)
     public List<Task> list(@AuthenticationPrincipal User user){
+
         return taskRepo.findAllByUserId(user.getId());
     }
 
@@ -61,6 +61,7 @@ public class TaskController {
     @PutMapping("{id}")
     @JsonView(Views.IdName.class)
     public Task updateTask(@PathVariable("id") Task taskFromDB, @RequestBody Task task){
+
         return taskService.update(taskFromDB, task);
     }
 }
