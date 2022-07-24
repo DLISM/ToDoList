@@ -27,13 +27,13 @@
 
         <div @click="checkTask(task.id, task.done)">
           <span v-if="task.done">
-            Сделан
+            не сделан
             <v-icon >
               mdi-check-circle
             </v-icon>
           </span>
           <span v-else>
-            Не сделан
+            Сделан
             <v-icon>
               mdi-checkbox-blank-circle-outline
             </v-icon>

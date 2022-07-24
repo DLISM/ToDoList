@@ -1,47 +1,20 @@
 <template>
   <v-app>
-    <v-toolbar
-        color="cyan"
-        dark
-        dense
-    >
-      <v-toolbar-title>My Tasks</v-toolbar-title>
-      <v-spacer></v-spacer>
-
-
-
-      <router-link :to="{name:'profile'}" v-if="profile" class="link">
-        {{profile.username}}
-        <v-icon>mdi-account</v-icon>
-      </router-link>
-      <router-link v-if="profile" to="/logout" class="link">
-        Выйти
-        <v-icon>log-out</v-icon>
-      </router-link>
-      <router-link v-else :to="{name:'login'}" class="link">
-        Войти
-      </router-link>
-
-    </v-toolbar>
-
+    <topbar/>
     <router-view></router-view>
-
   </v-app>
 </template>
 
 <script>
+import Topbar from 'components/Topbar.vue'
 export default {
   name: "App",
-
+  components:{
+    Topbar
+  },
   data(){
-    return{
-      profile: frontendData,
-    }
   },
   methods:{
-    login(){
-      this.$router.push('/login')
-    },
   }
 }
 </script>
@@ -68,9 +41,5 @@ h1{
   background: #dc3545;
 }
 
-.link{
-  text-decoration: none;
-  color: #fff;
-  margin: 0 15px;
-}
+
 </style>
