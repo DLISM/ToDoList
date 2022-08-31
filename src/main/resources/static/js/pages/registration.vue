@@ -59,8 +59,8 @@ export default {
     registration(){
       var user={username: this.username, password: this.password, passwordConfirm: this.passwordConfirm, email: this.email}
 
-      regAPI.save({}, user).then(response => {
-        console.log(response)
+      regAPI.save({}, user).then(() => {
+        this.$router.push({name:'login'})
       }, response => {
         console.log("error get")
       });
